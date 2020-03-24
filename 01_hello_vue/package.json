@@ -1,0 +1,12 @@
+{
+  "name": "01_hello_vue",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "compile:tailwindcss":"tailwindcss build src/tailwind.input.css -o src/tailwind.output.css"
+  },
+  "dependencies": {
+    "tailwindcss": "^1.2.0"
+  }
+}
