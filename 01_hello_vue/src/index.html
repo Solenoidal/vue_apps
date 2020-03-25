@@ -3,11 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!-- tailwindcss -->
     <link
       href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
       rel="stylesheet"
     />
+
     <!-- animate.css -->
     <link
       rel="stylesheet"
@@ -22,6 +24,7 @@
     <title>Hello Vue.js</title>
   </head>
   <body>
+    <!-- vueアプリのレンダリング場所 -->
     <div id="app">
       <header class="flex items-baseline">
         <h1 class="mr-3 text-6xl">{{message}}</h1>
@@ -38,20 +41,29 @@
       <hr />
       <div class="product">
         <div class="product-image">
-          <img v-bind:alt="alt" v-bind:src="image" />
+          <img v-bind:alt="image.alt" v-bind:src="image.src" />
         </div>
         <div class="product-info">
-          <h3 class="text-2xl">
+          <h3 class="text-2xl infoHeader">
             {{product}}
             <span
               v-show="isRecommended"
+              id="hederDecorator"
               class="px-2 text-base text-white bg-red-500 rounded-full"
               >おすすめ</span
             >
           </h3>
-          <p v-if="inventory > 10">In Stock</p>
-          <p v-else-if="0<inventory<=10">All most sold out</p>
-          <p v-else>Out of Stock</p>
+          <div class="stock">
+            <p v-if="inventory > 10">In Stock</p>
+            <p v-else-if="0<inventory<=10">All most sold out</p>
+            <p v-else>Out of Stock</p>
+          </div>
+          <ul class="detail">
+            <li v-for="detail in details">{{detail}}</li>
+          </ul>
+          <div v-for="variant in variants" :key="variant.id">
+            <p>{{variant.color}}</p>
+          </div>
         </div>
       </div>
       <footer></footer>
