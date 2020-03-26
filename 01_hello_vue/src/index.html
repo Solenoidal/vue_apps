@@ -28,7 +28,10 @@
     <div id="app">
       <header class="flex items-baseline">
         <h1 class="mr-3 text-6xl">{{message}}</h1>
-        <div class="animated bounceIn" v-on:click="clickTwitterButton">
+        <div
+          :class="[twitter.isClicked ? twitter.class : '']"
+          v-on:click="clickTwitterButton"
+        >
           <a
             v-bind:href="twitter.url"
             id="twitter"
@@ -61,8 +64,29 @@
           <ul class="detail">
             <li v-for="detail in details">{{detail}}</li>
           </ul>
-          <div v-for="variant in variants" :key="variant.id">
-            <p>{{variant.color}}</p>
+          <div class="flex">
+            <div
+              v-for="size in sizes"
+              class="flex items-center justify-center w-12 h-12 mx-3 border border-black rounded-lg hover:cursor-pointer"
+            >
+              <p>{{size}}</p>
+            </div>
+          </div>
+          <div class="flex mt-3 colorVariation">
+            <div
+              v-for="variant in variants"
+              :key="variant.id"
+              class="flex items-center justify-center w-12 h-12 mx-2 rounded-lg hover:cursor-pointer"
+              :style="{backgroundColor:variant.color}"
+              @mouseover="updateProduct(variant.image)"
+            ></div>
+          </div>
+          <button v-on:click="addToCart">Add to Cart</button>
+          <button v-on:click="removeCart">Remove Cart</button>
+          <button v-on:click="resetCart">Reset Cart</button>
+
+          <div class="cart">
+            <p>Cart({{cart}})</p>
           </div>
         </div>
       </div>
