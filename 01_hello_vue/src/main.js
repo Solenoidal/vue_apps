@@ -6,9 +6,9 @@ const app = new Vue({
   data: {
     message: "Hello Vue",
     product: "Socks",
+    brand: "Solenoid",
     isRecommended: true,
-    image: { src: "./assets/vmSocks-green.jpg", alt: "green socks image" },
-    inventory: 8,
+    selectedVariant: 0,
     details: ["80% cotton", "20% polyester", "Gender-neutral"],
     sizes: ["S", "M", "L", "XL"],
     variants: [
@@ -16,6 +16,7 @@ const app = new Vue({
         id: 1,
         color: "green",
         image: { src: "./assets/vmSocks-green.jpg", alt: "green socks image" },
+        quantity: 100,
       },
       {
         id: 2,
@@ -24,6 +25,7 @@ const app = new Vue({
           src: "./assets/vmSocks-blue-onWhite.jpg",
           alt: "blue socks image",
         },
+        quantity: 2,
       },
     ],
     cart: 0,
@@ -31,6 +33,19 @@ const app = new Vue({
       url: "https://twitter.com/maruisannsimai",
       isClicked: false,
       class: "animated bounceOut",
+    },
+  },
+  computed: {
+    // dataオブジェクトの値を加工して表示を変えるのに使える
+    // ここではbrandとproductプロパティを結合させてタイトルに表示するようにしている.関数なので返り値を与えておく必要がある.
+    title() {
+      return `${this.brand} ${this.product}`;
+    },
+    image(index) {
+      return this.variants[this.selectedVariant].image;
+    },
+    inStock() {
+      return this.variants[this.selectedVariant].quantity > 0;
     },
   },
   /* イベントハンドラー */
@@ -43,6 +58,7 @@ const app = new Vue({
     },
     addToCart() {
       this.cart++;
+      this.variants[this.selectedVariant].quantity--;
     },
     removeCart() {
       if (this.cart <= 0) {
@@ -50,12 +66,13 @@ const app = new Vue({
         return;
       }
       this.cart--;
+      this.variants[this.selectedVariant].quantity++;
     },
     resetCart() {
       this.cart = 0;
     },
-    updateProduct(imageObject) {
-      this.image = imageObject;
+    updateProduct(index) {
+      this.selectedVariant = index;
     },
   },
 });

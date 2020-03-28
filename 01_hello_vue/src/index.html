@@ -27,7 +27,9 @@
     <!-- vueアプリのレンダリング場所 -->
     <div id="app">
       <header class="flex items-baseline">
-        <h1 class="mr-3 text-6xl">{{message}}</h1>
+        <h1 class="mr-6 text-6xl">{{message}}</h1>
+
+        <!-- Twitter Button -->
         <div
           :class="[twitter.isClicked ? twitter.class : '']"
           v-on:click="clickTwitterButton"
@@ -35,11 +37,11 @@
           <a
             v-bind:href="twitter.url"
             id="twitter"
-            class="flex px-2 py-1 border border-blue-400 rounded-lg"
-            style="border-width: 0.25rem;"
-            ><i data-feather="twitter"></i>Follow Me</a
-          >
+            class="w-10 h-10 flex justify-center items-center rounded-lg bg-blue-900"
+            ><i data-feather="twitter" class="text-white"></i
+          ></a>
         </div>
+        <!-- Twitter Button -->
       </header>
       <hr />
       <div class="product">
@@ -48,7 +50,11 @@
         </div>
         <div class="product-info">
           <h3 class="text-2xl infoHeader">
-            {{product}}
+            <!-- 
+              computed propaties
+              html側はtitleメソッドを渡すだけで単純化できる
+            -->
+            {{title}}
             <span
               v-show="isRecommended"
               id="hederDecorator"
@@ -74,14 +80,20 @@
           </div>
           <div class="flex mt-3 colorVariation">
             <div
-              v-for="variant in variants"
+              v-for="(variant, index) in variants"
               :key="variant.id"
               class="flex items-center justify-center w-12 h-12 mx-2 rounded-lg hover:cursor-pointer"
               :style="{backgroundColor:variant.color}"
-              @mouseover="updateProduct(variant.image)"
+              @mouseover="updateProduct(index)"
             ></div>
           </div>
-          <button v-on:click="addToCart">Add to Cart</button>
+          <button
+            v-on:click="addToCart"
+            :disabled="!inStock"
+            :class="[inStock ? '' : 'animated bounceOut' ]"
+          >
+            Add to Cart
+          </button>
           <button v-on:click="removeCart">Remove Cart</button>
           <button v-on:click="resetCart">Reset Cart</button>
 
