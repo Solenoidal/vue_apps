@@ -174,22 +174,31 @@ Vue.component("product-review", {
       name: null /* 氏名 */,
       review: null /* レビュー */,
       rating: null /* 評価 */,
+      errors: [],
     };
   },
   methods: {
     onSubmit() {
-      const productReview = {
-        name: this.name,
-        review: this.review,
-        rating: this.rating,
-      };
-      // review-submittedイベントを発火させてproductReviewを送信
-      this.$emit("review-submitted", productReview);
+      // フォームがすべて入力されているときにデータを送信する
+      if (this.name && this.review && this.rating) {
+        const productReview = {
+          name: this.name,
+          review: this.review,
+          rating: this.rating,
+        };
+        // review-submittedイベントを発火させてproductReviewを送信
+        this.$emit("review-submitted", productReview);
 
-      // データを初期化
-      this.name = null;
-      this.review = null;
-      this.rating = null;
+        // データを初期化
+        this.name = null;
+        this.review = null;
+        this.rating = null;
+      } else {
+        // エラーハンドリング
+        if (!this.name) this.errors.push("Name required.");
+        if (!this.review) this.errors.push("Review required.");
+        if (!this.rating) this.errors.push("Rating required.");
+      }
     },
   },
   /**
@@ -201,6 +210,13 @@ Vue.component("product-review", {
    */
   template: `
     <form action="" class="review-form" @submit.prevent="onSubmit">
+      <p v-if="errors.length">
+        <b>Please correct the following error(s):</b>
+        <ul>
+          <li v-for="error in errors">{{error}}</li>
+        </ul>
+      </p>
+
       <p>
         <label for="name">Name:</label>
         <input type="text" id="name" v-model="name" placeholder="name" />
