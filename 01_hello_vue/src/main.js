@@ -64,6 +64,7 @@ Vue.component("product", {
           quantity: 2,
         },
       ],
+      reviews: [{ name: "Adam", review: "review text", rating: 4 }],
     };
   },
   computed: {
@@ -89,6 +90,9 @@ Vue.component("product", {
     updateProduct(index) {
       this.selectedVariant = index;
     },
+    addReview(productReview) {
+      this.reviews.push(productReview);
+    },
   },
   template: `
     <div class="product">
@@ -97,7 +101,7 @@ Vue.component("product", {
       </div>
       <div class="product-info">
         <h3 class="text-2xl infoHeader">
-          <!-- 
+          <!--
             computed propaties
             html側はtitleメソッドを渡すだけで単純化できる
           -->
@@ -138,6 +142,20 @@ Vue.component("product", {
         </button>
 
       </div>
+
+      <div>
+        <h2>Reviews</h2>
+        <p v-if="!reviews.length">There are no reviews yet.</p>
+        <ul>
+          <li v-for="{name,rating,review} in reviews">
+            <p>{{name}}</p>
+            <p>{{rating}}</p>
+            <p>{{review}}</p>
+          </li>
+        </ul>
+      </div>
+
+      <product-review @review-submitted="addReview"></product-review>
     </div>
   `,
 });
@@ -149,6 +167,69 @@ Vue.component("cart", {
   method: {},
   template: ``,
 });
+
+Vue.component("product-review", {
+  data() {
+    return {
+      name: null /* 氏名 */,
+      review: null /* レビュー */,
+      rating: null /* 評価 */,
+    };
+  },
+  methods: {
+    onSubmit() {
+      const productReview = {
+        name: this.name,
+        review: this.review,
+        rating: this.rating,
+      };
+      // review-submittedイベントを発火させてproductReviewを送信
+      this.$emit("review-submitted", productReview);
+
+      // データを初期化
+      this.name = null;
+      this.review = null;
+      this.rating = null;
+    },
+  },
+  /**
+   * フォームの機能はユーザーのインプットをサーバに送信することです｡
+   * しかし入力データはJSファイル側で管理したいので入力したデータをJSのデータプロパティへ送信してあげたいです｡
+   * これまではv-bindによってdata->テンプレートという一方向データバインディングを行ってきましたが､
+   * ここでは､data<->templateという値を双方向でやり取りする手段を使います｡
+   * v-modelによって双方向データバインディングを可能にしています｡
+   */
+  template: `
+    <form action="" class="review-form" @submit.prevent="onSubmit">
+      <p>
+        <label for="name">Name:</label>
+        <input type="text" id="name" v-model="name" placeholder="name" />
+      </p>
+      <p>
+        <label for="review">Review:</label>
+        <textarea
+          name=""
+          id="review"
+          cols="30"
+          rows="10"
+          v-model="review"
+        ></textarea>
+      </p>
+      <p>
+        <label for="rating">Rating:</label>
+        <select name="" id="rating" v-model.number="rating">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </p>
+      <p><input type="submit" value="Submit" /></p>
+    </form>
+  `,
+});
+
 const app = new Vue({
   /* cssセレクタを指定するとそこがvueの機能を搭載する場所になる */
   el: "#app",
