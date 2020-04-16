@@ -1,8 +1,15 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Home</router-link>
+      |
+      <router-link :to="{ name: 'About' }">About</router-link>
+      |
+      <router-link :to="{ name: 'event-list' }">Real-World-App</router-link>
+      |
+      <router-link :to="{ name: 'event-show' }">開催予定のイベント</router-link>
+      |
+      <router-link :to="{ name: 'event-create' }">イベントの作成</router-link>
     </div>
     <router-view />
   </div>
