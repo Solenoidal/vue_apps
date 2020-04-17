@@ -1,5 +1,5 @@
 /*
-ルーターの制御を行うファイル 
+ルーターの制御を行うファイル
 ルーターの情報(パス､名前､コンポーネント､エイリアス等)を格納し､
 App.vueで使うようにエクスポートしています
 */
@@ -9,6 +9,7 @@ import Home from "../views/Home.vue";
 import EventList from "../views/EventList.vue";
 import EventShow from "../views/EventShow.vue";
 import EventCreate from "../views/EventCreate.vue";
+import User from "../views/User.vue";
 
 Vue.use(VueRouter);
 
@@ -33,18 +34,27 @@ const routes = [
     component: EventList
   },
   {
-    path: "/real-world-app/event",
+    path: "/real-world-app/event/:id",
     name: "event-show",
-    component: EventShow
+    component: EventShow,
+    props: true
   },
   {
     path: "/real-world-app/create",
     name: "event-create",
     component: EventCreate
+  },
+  {
+    // using route parameter
+    path: "/user/:username",
+    name: "user",
+    component: User,
+    props: true
   }
 ];
 
 const router = new VueRouter({
+  /* history uses history.pushstate API */
   mode: "history",
   base: process.env.BASE_URL,
   routes
