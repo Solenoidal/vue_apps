@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Events Listign</h1>
+    <h1>Events Lists</h1>
     <div v-for="event in events" :key="event.id" class="event">
       <EventCard v-bind="event" />
     </div>
@@ -9,36 +9,20 @@
 
 <script>
 import EventCard from "@/components/EventCard.vue";
+import EventService from "@/services/EventService.js";
+
 export default {
   components: { EventCard },
   data() {
     return {
-      events: [
-        {
-          id: 1,
-          title: "JS-Conf 2020",
-          date: new Date(),
-          time: "11:20",
-          attendees: { id: "jfiaejif", name: "solenoid" }
-        },
-        { id: 2 },
-        { id: 3 }
-      ]
+      events: []
     };
+  },
+  async created() {
+    const res = await EventService.getEvents().catch(err => {
+      console.log("error: ", err.message);
+    });
+    this.events = res.data;
   }
 };
 </script>
-
-<style>
-.event {
-  display: inline-block;
-  box-sizing: border-box;
-  border: 0.25rem solid gray;
-  margin: 0 0.5rem;
-  padding: 0.2rem;
-  border-radius: 0.5rem;
-}
-.event a {
-  color: #2c3e50;
-}
-</style>
