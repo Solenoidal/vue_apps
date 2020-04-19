@@ -1,22 +1,13 @@
 <template>
-  <div class="card-container">
-    event #{{ id }}
-    <router-link :to="{ name: 'event-show', params: { id } }">
-      <h1 class="title">
-        {{ title }}
-      </h1>
-    </router-link>
-    <p class="date">
-      {{ date }}
-    </p>
-    <p class="time">
-      {{ time }}
-    </p>
-    <div class="attendees">
-      <BaseIcon name="users" />
-      {{ attendees.name }}
+  <router-link class="event-link" :to="{ name: 'event-show', params: { id } }">
+    <div class="event-card -shadow">
+      <span class="eyebrow">@{{ time }} on {{ date }}</span>
+      <h4 class="title">{{ title }}</h4>
+      <BaseIcon name="users"
+        >{{ attendees ? attendees.length : 0 }} attending</BaseIcon
+      >
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -24,21 +15,32 @@ export default {
   props: {
     id: { type: Number, required: true },
     title: String,
-    date: Date,
+    date: String,
     time: String,
     attendees: {
-      type: Object,
-      default: () => {
-        return { id: null, name: null };
-      }
+      type: Array
     }
   }
 };
 </script>
 
-<style>
-.attendees {
-  display: inline-flex;
-  align-items: center;
+<style scoped>
+.event-card {
+  padding: 20px;
+  margin-bottom: 24px;
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+.event-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2), 0 1px 15px 0 rgba(0, 0, 0, 0.19);
+}
+.event-card > .title {
+  margin: 0;
+}
+.event-link {
+  color: black;
+  text-decoration: none;
+  font-weight: 100;
 }
 </style>
