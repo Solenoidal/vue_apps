@@ -44,6 +44,60 @@
       "date": "2019-02-02T23:27:00.000Z",
       "time": "1:00",
       "attendees": []
+    },
+    {
+      "id": 3711872,
+      "user": {
+        "id": "ihaie",
+        "name": "solenoid"
+      },
+      "category": "programming",
+      "organizer": {
+        "id": "ihaie",
+        "name": "solenoid"
+      },
+      "title": "dfbzf",
+      "description": "fddz",
+      "location": "bvfd",
+      "date": "2020-04-08T07:50:00.000Z",
+      "time": "15:00",
+      "attendees": []
+    },
+    {
+      "id": 4247943,
+      "user": {
+        "id": "ihaie",
+        "name": "solenoid"
+      },
+      "category": "programming",
+      "organizer": {
+        "id": "ihaie",
+        "name": "solenoid"
+      },
+      "title": "fagae",
+      "description": "garstf",
+      "location": "gsrhthtbsbv",
+      "date": "2020-04-14T08:44:00.000Z",
+      "time": "15:00",
+      "attendees": []
+    },
+    {
+      "id": 9424842,
+      "user": {
+        "id": "ihaie",
+        "name": "solenoid"
+      },
+      "category": "programming",
+      "organizer": {
+        "id": "ihaie",
+        "name": "solenoid"
+      },
+      "title": "dbjdbjea",
+      "description": "nsnfkne4",
+      "location": "fngiesnig",
+      "date": "2020-07-16T08:44:00.000Z",
+      "time": "11:00",
+      "attendees": []
     }
   ]
 }
