@@ -3,25 +3,7 @@
     <div class="clock">
       <Clock />
     </div>
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      |
-      <router-link :to="{ name: 'About' }">
-        About
-      </router-link>
-      |
-      <router-link :to="{ name: 'event-list' }">
-        Real-World-App
-      </router-link>
-      |
-      <router-link :to="{ name: 'event-create' }">
-        イベントの作成
-      </router-link>
-      |
-      <router-link :to="{ name: 'user', params: { username: 'Solenoid' } }">
-        Solenoid
-      </router-link>
-    </div>
+    <NavBar />
     <NotificationContainer />
     <router-view :key="$route.fullPath" />
   </div>
@@ -29,8 +11,9 @@
 <script>
 import Clock from "@/components/Clock.vue";
 import NotificationContainer from "@/components/NotificationContainer.vue";
+import NavBar from "@/components/NavBar.vue";
 export default {
-  components: { Clock, NotificationContainer }
+  components: { Clock, NotificationContainer, NavBar }
 };
 </script>
 <style>
