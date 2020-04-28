@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div class="clock">
+      <Clock />
+    </div>
     <div id="nav">
       <router-link to="/">Home</router-link>
       |
@@ -22,7 +25,12 @@
     <router-view :key="$route.fullPath" />
   </div>
 </template>
-
+<script>
+import Clock from "@/components/Clock.vue";
+export default {
+  components: { Clock }
+};
+</script>
 <style>
 html {
   -webkit-text-size-adjust: 100%;
