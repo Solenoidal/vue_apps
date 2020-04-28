@@ -22,13 +22,15 @@
         Solenoid
       </router-link>
     </div>
+    <NotificationContainer />
     <router-view :key="$route.fullPath" />
   </div>
 </template>
 <script>
 import Clock from "@/components/Clock.vue";
+import NotificationContainer from "@/components/NotificationContainer.vue";
 export default {
-  components: { Clock }
+  components: { Clock, NotificationContainer }
 };
 </script>
 <style>
