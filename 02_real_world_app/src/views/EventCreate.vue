@@ -71,14 +71,14 @@ export default {
   },
   methods: {
     async createEvent() {
-      await this.$store.dispatch("createEvent", this.event).catch(() => {
+      await this.$store.dispatch("event/createEvent", this.event).catch(() => {
         console.log("There was a problem creating your event");
       });
       this.$router.push({ name: "event-show", params: { id: this.event.id } });
       this.event = this.createFreshEventObject();
     },
     createFreshEventObject() {
-      const user = this.$store.state.user;
+      const user = this.$store.state.user.user;
       const id = Math.floor(Math.random() * 10000000);
       return {
         id,
@@ -94,26 +94,5 @@ export default {
       };
     }
   }
-  // more useful way to use state is pass it to a method in computed property
-  // computed: {
-  //   userName() {
-  //     return this.$state.user.name;
-  //   }
-  // },
-  //
-  // or using mapState method
-  // computed: mapState({
-  //   username: state => state.user.name,
-  //   categories: "categories"
-  // }),
-  //
-  // the simplest state processing but it is used for the top-level state
-  // computed: mapState(["user", "categories"])
-  //
-  // if you want to ues mapState with other method, you can use spread operator
-  // computed: {
-  //   ...mapGetters(["catLength", "activeTodosCount"]),
-  //   ...mapState(["user", "todos"])
-  // }
 };
 </script>

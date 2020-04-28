@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>Events Lists</h1>
-    <div v-for="event in events" :key="event.id" class="event">
+    <h1>Events for {{ user.user.name }}</h1>
+    <div v-for="event in event.events" :key="event.id" class="event">
       <EventCard v-bind="event" />
     </div>
     <template v-if="page != 1">
@@ -23,13 +23,14 @@
 
 <script>
 import EventCard from "@/components/EventCard.vue";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   components: { EventCard },
   created() {
-    this.$store.dispatch("fetchEvents", {
-      perPage: 3,
+    this.perPage = 3;
+    this.fetchEvents({
+      perPage: this.perPage,
       page: this.page
     });
   },
@@ -38,9 +39,12 @@ export default {
       return parseInt(this.$route.query.page) || 1;
     },
     hasNext() {
-      return this.events_length >= this.page * this.perPage;
+      return this.event.events_length > this.page * this.perPage;
     },
-    ...mapState(["events", "events_length"])
+    ...mapState(["event", "user"])
+  },
+  methods: {
+    ...mapActions("event", ["fetchEvents"])
   }
 };
 </script>
