@@ -53,10 +53,10 @@
 <script>
 /* mapState is helper function processing state */
 // import { mapState, mapGetters } from "vuex";
-import datepicker from "vuejs-datepicker";
+import Datepicker from "vuejs-datepicker";
 export default {
   components: {
-    datepicker
+    Datepicker
   },
   data() {
     const times = [];
@@ -82,6 +82,18 @@ export default {
         () => {};
       }
     },
+    // createEvent() {
+    //   this.$store
+    //     .dispatch("event/createEvent", this.event)
+    //     .then(() => {
+    //       this.$router.push({
+    //         name: "event-show",
+    //         params: { id: this.event.id }
+    //       });
+    //       this.event = this.createFreshEventObject();
+    //     })
+    //     .catch(() => {});
+    // },
     createFreshEventObject() {
       const user = this.$store.state.user.user;
       const id = Math.floor(Math.random() * 10000000);
@@ -101,3 +113,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.field {
+  margin-bottom: 24px;
+}
+</style>

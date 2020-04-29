@@ -1,26 +1,26 @@
 <template>
-  <div id="nav" class="nav">
-    <router-link to="/" class="brand">Real World Events</router-link>
-    <nav>
-      <router-link to="/">Home</router-link>
-      |
-      <router-link :to="{ name: 'About' }">
-        About
-      </router-link>
-      |
-      <router-link :to="{ name: 'event-list' }">
-        Real-World-App
-      </router-link>
-      |
-      <router-link :to="{ name: 'event-create' }">
-        イベントの作成
-      </router-link>
-      |
-      <router-link :to="{ name: 'user', params: { username: 'Solenoid' } }">
-        Solenoid
-      </router-link>
-    </nav>
-  </div>
+  <!-- <div id="nav" class="nav"> -->
+  <!-- <router-link to="/" class="brand">Real World Events</router-link> -->
+  <nav>
+    <router-link to="/">Home</router-link>
+    |
+    <router-link :to="{ name: 'About' }">
+      About
+    </router-link>
+    |
+    <router-link :to="{ name: 'event-list' }">
+      Real-World-App
+    </router-link>
+    |
+    <router-link :to="{ name: 'event-create' }">
+      イベントの作成
+    </router-link>
+    |
+    <router-link :to="{ name: 'user', params: { username: 'Solenoid' } }">
+      Solenoid
+    </router-link>
+  </nav>
+  <!-- </div> -->
 </template>
 
 <script>

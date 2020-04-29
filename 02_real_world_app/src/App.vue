@@ -8,14 +8,17 @@
     <router-view :key="$route.fullPath" />
   </div>
 </template>
+
 <script>
 import Clock from "@/components/Clock.vue";
 import NotificationContainer from "@/components/NotificationContainer.vue";
 import NavBar from "@/components/NavBar.vue";
+
 export default {
   components: { Clock, NotificationContainer, NavBar }
 };
 </script>
+
 <style>
 html {
   -webkit-text-size-adjust: 100%;

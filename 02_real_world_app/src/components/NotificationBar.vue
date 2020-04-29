@@ -35,4 +35,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.notification-bar {
+  margin: 1em 0 1em;
+}
+</style>
